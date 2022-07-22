@@ -2,6 +2,7 @@ const express =require ("express")
 const app=express();
 const mongoose=require("mongoose")
 const dotenv=require("dotenv")
+const userRoute=require("./routes/users")
 
 dotenv.config();
 
@@ -13,11 +14,11 @@ mongoose.connect( process.env.MONGO_URL)
     console.log(err);
 });
 
-// app.get("/api/test",()=>{
-//     console.log("test is successfull")
-// })
-
-
+app.use(express.json());
+// we need to see the code response in json formate
+app.use("/api/users",userRoute)
+// this is the url that we use everytime when we enter a website in front if we want to added another things then we have a thing called user router
+// userRouter will give us the extended url for other things that should be done
 
 app.listen( 5000, ()=>{
     console.log("backend server is running")
